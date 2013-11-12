@@ -1,0 +1,53 @@
+<html>
+  <head>
+    <link href='/stylesheets/app.css' rel='stylesheet' type='text'>
+    <title>I Have No Mouth, and I Must Play Rock, Paper Scissors</title>
+  </head>
+  <body>
+    <header>
+      <section>
+        <h1>I Have No Mouth, and I Must Play Rock, Paper Scissors</h1>
+      </section>
+    </header>
+    <section id='main'>
+      <section id='rock' data-pick='rock'>
+        <img src='/images/rock.png' height='200px' width='200px'>
+      </section>
+      <section id='paper' data-pick='paper'>
+        <img src='/images/paper.png' height='200px' width='200px'>
+      </section>
+      <section id='scissors' data-pick='scissors'>
+        <img src='/images/scissors.png' height='200px' width='200px'>
+      </section>
+      <section id='spock' data-pick='spock'>
+        <img src='/images/spock.jpg' height='200px' width='200px'>
+      </section>
+      <section id='lizard' data-pick='lizard' height='200px' width='200px'>
+        <img src='/images/lizard.jpg' height='200px' width='200px'>
+      </section>
+    </section>
+    <div id='result'></div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="lib/RockPaperScissors.js"></script>
+    <script>
+      var am = new Player('AM');
+      var ted = new Player('Ted');
+
+      var game = new Game(am, ted);
+
+      $(function(){
+        $('#main section').on('click', function(){
+          am.picksAI();
+          ted.picks($(this).data('pick'));
+          $('#result').html(game.output());
+        });
+      });
+
+      $('#main img').click(function() {
+        var message = $.get('/message', function() {
+          console.log(message.responseText)
+        });
+      });
+    </script>
+  </body>
+</html>
